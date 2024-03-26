@@ -44,7 +44,6 @@ const Navbar = () => {
           </div>
 
           <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
-            {/* <!-- Logo --> */}
             <Link className="flex flex-shrink-0 items-center" href="/">
               <Image
                 className="h-10 w-auto"
@@ -58,7 +57,7 @@ const Navbar = () => {
                 PropertyPulse
               </span>
             </Link>
-            {/* <!-- Desktop Menu Hidden below md screens --> */}
+
             <div className="hidden md:ml-6 md:block">
               <div className="flex space-x-2">
                 <Link
@@ -103,14 +102,9 @@ const Navbar = () => {
               </div>
             </div>
           )}
-
-          {/* <!-- Right Side Menu (Logged Out) --> */}
-
-          {/* <!-- Right Side Menu (Logged In) --> */}
         </div>
       </div>
 
-      {/* <!-- Mobile menu, show/hide based on menu state. --> */}
       {openMobileNav && <MobileMenu />}
     </nav>
   );
