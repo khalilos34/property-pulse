@@ -1,15 +1,15 @@
+import { IProperty } from "@/lib/models/property";
 import Image from "next/image";
 import Link from "next/link";
 import {
   FaBath,
   FaBed,
-  FaMapMarker,
   FaMapMarkerAlt,
   FaMoneyBill,
   FaRulerCombined,
 } from "react-icons/fa";
 
-const PropertyCard = ({ property }: any) => {
+const PropertyCard = ({ property }: { property: IProperty }) => {
   const { rates } = property;
   const getRatesDisplay = () => {
     if (rates.monthly) {
@@ -21,7 +21,7 @@ const PropertyCard = ({ property }: any) => {
     }
   };
   return (
-    <div className="rounded-xl shadow-md relative">
+    <section className="rounded-xl shadow-md relative">
       <Image
         src={`/properties/${property.images[0]}`}
         alt="property background"
@@ -50,7 +50,7 @@ const PropertyCard = ({ property }: any) => {
           </p>
           <p className="flex items-center justify-center gap-x-2">
             <FaRulerCombined />
-            {property.square_feet}
+            {property.surface}
             <span className="md:hidden lg:inline">sqft</span>
           </p>
         </div>
@@ -58,13 +58,11 @@ const PropertyCard = ({ property }: any) => {
         <div className="flex justify-center gap-4 text-green-900 text-sm mb-4">
           {rates.nightly && (
             <p className="flex items-center justify-center gap-x-2">
-              {" "}
               <FaMoneyBill /> nightly
             </p>
           )}
           {rates.monthly && (
             <p className="flex items-center justify-center gap-x-2">
-              {" "}
               <FaMoneyBill />
               monthly
             </p>
@@ -94,7 +92,7 @@ const PropertyCard = ({ property }: any) => {
           </Link>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

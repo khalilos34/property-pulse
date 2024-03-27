@@ -1,11 +1,13 @@
-import { propertiesData } from "@/constants/properties";
 import PropertyCard from "./PropertyCard";
 import Link from "next/link";
+import { fetchAllProperties } from "@/lib/actions/properties.actions";
 
-const RandomHomeProperties = () => {
-  const randomProperty = propertiesData
+const RandomHomeProperties = async () => {
+  const properties = await fetchAllProperties();
+  const randomProperty = properties
     .sort(() => Math.random() - Math.random())
     .slice(0, 3);
+  ``;
   return (
     <>
       <section className="px-4 py-6">
@@ -14,8 +16,10 @@ const RandomHomeProperties = () => {
             Random Properties
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {randomProperty.map((property) => (
-              <PropertyCard property={property} />
+            {randomProperty.map((property, i) => (
+              <div key={i}>
+                <PropertyCard property={property} />
+              </div>
             ))}
           </div>
         </div>
