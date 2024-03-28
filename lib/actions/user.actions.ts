@@ -1,7 +1,8 @@
 import connectDB from "@/config/database";
-import User from "../models/user";
+import User, { IUser } from "../models/user";
 import { createUserParams, updateUserParams } from "@/types/type";
 import { revalidatePath } from "next/cache";
+import { auth } from "@clerk/nextjs";
 
 export const createUser = async (user: createUserParams) => {
   try {
@@ -45,4 +46,14 @@ export const deleteUser = async (clerkId: string) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const getUser = async (): Promise<IUser | null> => {
+  const { userId } = auth();
+  if (!userId) return null;
+
+  await connectDB();
+
+  const user = User.findOne({ clerkId: userId });
+  return user;
 };

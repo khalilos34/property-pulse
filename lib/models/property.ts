@@ -26,9 +26,9 @@ export interface IProperty extends Document {
     phone: string;
   };
   images: string[];
-  is_featured: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  is_featured?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 const PropertySchema = new Schema(
