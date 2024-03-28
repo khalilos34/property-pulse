@@ -67,23 +67,23 @@ const PropertyInfo = ({ property }: { property: IProperty }) => {
       <div className="bg-white p-6 rounded-lg shadow-md mt-6">
         <h3 className="text-lg font-bold mb-6">Description & Details</h3>
         <div className="flex justify-center gap-4 text-blue-500 mb-4 text-xl space-x-9">
-          <p className="flex items-center justify-center gap-x-1">
+          <p className="flex items-center justify-center gap-x-2">
             <FaBed size={24} /> {property.beds}
             <span className="hidden sm:inline">Beds</span>
           </p>
-          <p className="flex items-center justify-center gap-x-1">
+          <p className="flex items-center justify-center gap-x-2">
             <FaBath size={24} /> {property.baths}
             <span className="hidden sm:inline">Baths</span>
           </p>
-          <p className="flex items-center justify-center gap-x-1">
+          <p className="flex items-center justify-center gap-x-2">
             <FaRulerCombined size={24} /> {property.surface}
             <span className="hidden sm:inline">sqft</span>
           </p>
         </div>
-        <p className="text-gray-500 mb-4">
-          This is a beautiful apartment located near the commons
+
+        <p className="text-gray-500 mb-4 text-center">
+          {property?.description}
         </p>
-        <p className="text-gray-500 mb-4">{property?.description}</p>
       </div>
 
       <div className="bg-white p-6 rounded-lg shadow-md mt-6">

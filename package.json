@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.29.9",
     "mongodb": "^6.5.0",
     "mongoos": "^0.0.1-security",
     "mongoose": "^8.2.3",
