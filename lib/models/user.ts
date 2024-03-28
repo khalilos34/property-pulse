@@ -3,14 +3,24 @@ export interface User extends Document {
   username: string;
   clerkId: string;
   email: string;
-  image?: string;
+  photo: string;
   bookmarks: string[];
   createdAt: Date;
   updatedAt: Date;
+  first_name: string;
+  last_name: string;
 }
 
 const UserSchema = new Schema(
   {
+    first_name: {
+      type: String,
+      required: true,
+    },
+    last_name: {
+      type: String,
+      required: true,
+    },
     username: {
       type: String,
       required: true,
@@ -24,7 +34,7 @@ const UserSchema = new Schema(
       required: true,
       unique: true,
     },
-    image: {
+    photo: {
       type: String,
     },
     bookmarks: [
