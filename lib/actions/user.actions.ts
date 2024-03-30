@@ -1,3 +1,4 @@
+"use server";
 import connectDB from "@/config/database";
 import User, { IUser } from "../models/user";
 import { createUserParams, updateUserParams } from "@/types/type";

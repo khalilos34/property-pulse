@@ -1,37 +1,43 @@
-// @ts-nocheck
+//@ts-nocheck
 "use client";
 
+import { createNewProperty } from "@/lib/actions/properties.actions";
+import { IProperty } from "@/lib/models/property";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const testData = {
-  owner: "John Doe",
-  name: "Cozy Apartment",
+  name: "",
   type: "Apartment",
-  description: "A comfortable apartment in a lively neighborhood.",
+  description: "",
   location: {
-    street: "123 Main St",
-    city: "Metropolis",
-    state: "California",
-    zipcode: "12345",
+    street: "fgfd",
+    city: "fdgdfg",
+    state: "dfgdfg",
+    zipcode: "fdgdfg",
   },
-  surface: 800,
+  surface: 33,
   beds: 2,
   baths: 1,
-  amenities: ["Wifi", "Swimming Pool", "Kitchen", "Air Conditioning"],
+  amenities: [],
   rates: {
-    nightly: 100,
-    weekly: 600,
-    monthly: 2000,
+    nightly: 2,
+    weekly: 45,
+    monthly: 0,
   },
   seller_info: {
-    name: "Jane Smith",
-    email: "jane@example.com",
-    phone: "555-123-4567",
+    name: "fdgdfg",
+    email: "fgdfg",
+    phone: "fdgdfg",
   },
   images: [],
 };
 const AddPropertyForm = () => {
-  const [input, setInput] = useState(testData);
+  const [input, setInput] = useState<IProperty>(testData);
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  //handle change
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -51,6 +57,7 @@ const AddPropertyForm = () => {
       setInput((prevInputs) => ({ ...prevInputs, [name]: value }));
     }
   };
+  //handle amenities changes
   const handleAmenitiesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = e.target;
     const updatedAmenities = [...input.amenities];
@@ -61,19 +68,33 @@ const AddPropertyForm = () => {
     }
     setInput((prevInputs) => ({ ...prevInputs, amenities: updatedAmenities }));
   };
+  //handle images changes
   const handleImagesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const updatedImages = [...input.images];
-    for (const file of e.target.files) {
+    for (const file of e.target.files!) {
       updatedImages.push(file);
     }
     setInput((prevInputs) => ({ ...prevInputs, images: updatedImages }));
   };
+  //handle submitting
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const newProperty = await createNewProperty(input);
+      if (newProperty) {
+        router.push(`/properties/` + newProperty._id);
+        setInput(testData);
+      }
+    } catch (error) {
+      console.error("Error creating new property:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <form
-      action={`/api/properties/add`}
-      method="POST"
-      encType="multipart/form-data"
-    >
+    <form onSubmit={handleSubmit}>
       <h2 className="text-3xl text-center font-semibold mb-6">Add Property</h2>
 
       <div className="mb-4">
@@ -141,6 +162,7 @@ const AddPropertyForm = () => {
           placeholder="Street"
           value={input.location.street}
           onChange={handleChange}
+          required
         />
         <input
           type="text"
@@ -531,8 +553,9 @@ const AddPropertyForm = () => {
         <button
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
           type="submit"
+          disabled={loading}
         >
-          Add Property
+          {loading ? "Loading..." : "Add property"}
         </button>
       </div>
     </form>
