@@ -8,6 +8,7 @@ import {
   FaRulerCombined,
 } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
+import PropertyImages from "./PropertyImages";
 
 const PropertyInfo = ({ property }: { property: IProperty }) => {
   return (
@@ -62,6 +63,10 @@ const PropertyInfo = ({ property }: { property: IProperty }) => {
             )}
           </div>
         </div>
+      </div>
+      <div className="bg-white p-6 rounded-lg shadow-md mt-6 w-full">
+        <h3 className="text-lg font-bold mb-6">Images</h3>
+        <PropertyImages images={property.images} />
       </div>
 
       <div className="bg-white p-6 rounded-lg shadow-md mt-6">

@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/shared/navbar/Navbar";
 import Footer from "@/components/shared/Footer";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
@@ -27,6 +29,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
+          <ToastContainer />
         </body>
       </html>
     </ClerkProvider>

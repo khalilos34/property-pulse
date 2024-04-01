@@ -1,6 +1,7 @@
 import { Document } from "mongodb";
 import { Schema, model, models } from "mongoose";
 export interface IProperty extends Document {
+  _id: string;
   name: string;
   type: string;
   description?: string;
@@ -24,7 +25,7 @@ export interface IProperty extends Document {
     email: string;
     phone: string;
   };
-  images: File[];
+  images: string[];
   is_featured?: boolean;
   createdAt?: Date;
   updatedAt?: Date;

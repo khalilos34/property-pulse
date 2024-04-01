@@ -10,6 +10,7 @@ import { FaArrowLeft } from "react-icons/fa";
 const PropertyPage = async ({ params }: { params: { id: string } }) => {
   const propertyId = params.id;
   const property = await fetchPropertyById(propertyId);
+  if (!property) return "";
 
   return (
     <>

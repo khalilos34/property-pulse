@@ -23,7 +23,7 @@ const PropertyCard = ({ property }: { property: IProperty }) => {
   return (
     <section className="rounded-xl shadow-md relative">
       <Image
-        src={`/properties/${property.images[0]}`}
+        src={`${property.images[0]}`}
         alt="property background"
         height={0}
         width={0}

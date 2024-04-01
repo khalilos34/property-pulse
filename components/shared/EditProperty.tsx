@@ -1,37 +1,41 @@
 //@ts-nocheck
 "use client";
 
+import { updateProperty } from "@/lib/actions/properties.actions";
 import { IProperty } from "@/lib/models/property";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
-const testData = {
-  name: "",
-  type: "",
-  description: "",
-  location: {
-    street: "",
-    city: "",
-    state: "",
-    zipcode: "",
-  },
-  surface: "",
-  beds: "",
-  baths: "",
-  amenities: [],
-  rates: {
-    nightly: "",
-    weekly: "",
-    monthly: "",
-  },
-  seller_info: {
-    name: "",
-    email: "",
-    phone: "",
-  },
-  images: [],
-};
-const AddPropertyForm = ({ userId }: { userId: string }) => {
+const EditProperty = ({ property }: { property: IProperty }) => {
+  const testData = {
+    _id: property._id,
+    name: property.name,
+    type: property.type,
+    description: property.description,
+    location: {
+      street: property.location.street,
+      city: property.location.city,
+      state: property.location.state,
+      zipcode: property.location.zipcode,
+    },
+    surface: property.surface,
+    beds: property.beds,
+    baths: property.baths,
+    amenities: property.amenities,
+    rates: {
+      nightly: property.rates.nightly || "",
+      weekly: property.rates.weekly || "",
+      monthly: property.rates.monthly || "",
+    },
+    seller_info: {
+      name: property.seller_info.name,
+      email: property.seller_info.email,
+      phone: property.seller_info.phone,
+    },
+    images: property.images,
+  };
+  const router = useRouter();
   const [input, setInput] = useState<IProperty>(testData);
   const [loading, setLoading] = useState(false);
 
@@ -77,9 +81,12 @@ const AddPropertyForm = ({ userId }: { userId: string }) => {
 
   return (
     <form
-      action={"/api/properties/add"}
-      method="POST"
-      encType="multipart/form-data"
+      action={() => {
+        console.log(input);
+        updateProperty(input);
+        router.push(`/properties/${property._id}`);
+        toast.success("property updated successfully");
+      }}
     >
       <h2 className="text-3xl text-center font-semibold mb-6">Add Property</h2>
 
@@ -520,33 +527,17 @@ const AddPropertyForm = ({ userId }: { userId: string }) => {
         />
       </div>
 
-      <div className="mb-4">
-        <label htmlFor="images" className="block text-gray-700 font-bold mb-2">
-          Images (Select up to 4 images)
-        </label>
-        <input
-          type="file"
-          id="images"
-          name="images"
-          className="border rounded w-full py-2 px-3"
-          accept="image/*"
-          multiple
-          onChange={handleImagesChange}
-          required
-        />
-      </div>
-
       <div>
         <button
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
           type="submit"
           disabled={loading}
         >
-          {loading ? "Loading..." : "Add property"}
+          {loading ? "Loading..." : "Edit property"}
         </button>
       </div>
     </form>
   );
 };
 
-export default AddPropertyForm;
+export default EditProperty;

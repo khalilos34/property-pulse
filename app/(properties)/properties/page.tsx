@@ -1,8 +1,6 @@
 import PropertyCard from "@/components/shared/properties/PropertyCard";
 import SearchForm from "@/components/shared/properties/SearchForm";
-import { propertiesData } from "@/constants/properties";
 import { fetchAllProperties } from "@/lib/actions/properties.actions";
-import React from "react";
 
 const PropertiesPage = async () => {
   const properties = await fetchAllProperties();

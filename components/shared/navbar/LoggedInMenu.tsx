@@ -1,13 +1,32 @@
-import React, { useState } from "react";
+"use client";
+import { useState } from "react";
 import ProfileDropdown from "./ProfileDropdown";
 import Image from "next/image";
 import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
+import { usePathname } from "next/navigation";
 
 const LoggedInMenu = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const pathname = usePathname();
   return (
     <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
+      <Link
+        href="/profile"
+        className={`${
+          pathname === "/profile" ? "bg-black" : ""
+        }  text-white hover:bg-gray-900 hover:text-white rounded-md mx-2 px-3 py-2`}
+      >
+        Profile
+      </Link>
+      <Link
+        href="/bookmarks"
+        className={`${
+          pathname === "/bookmarks" ? "bg-black" : ""
+        }  text-white hover:bg-gray-900 hover:text-white rounded-md mr-2 px-3 py-2`}
+      >
+        Bookmarks
+      </Link>
       <Link href="/" className="relative group">
         <button
           type="button"
