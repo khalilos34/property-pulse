@@ -36,7 +36,7 @@ export const POST = async (req: Request, res: Response) => {
         phone: formData.get("seller_info.phone"),
       },
     };
-    const imageUploadPromises = propertyData.images.map(async (image) => {
+    const imageUploadPromises = propertyData.images.map(async (image: any) => {
       const imageBuffer = await image.arrayBuffer();
       const imageArray = Array.from(new Uint8Array(imageBuffer));
       const imageData = Buffer.from(imageArray);
