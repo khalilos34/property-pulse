@@ -2,7 +2,7 @@
 import connectDB from "@/config/database";
 import Property, { IProperty } from "../models/property";
 import { revalidatePath } from "next/cache";
-
+import User from "../models/user";
 export const fetchAllProperties = async (): Promise<IProperty[]> => {
   await connectDB();
   const properties = await Property.find({});
@@ -45,5 +45,24 @@ export const updateProperty = async (property: IProperty) => {
     revalidatePath("/properties");
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const fetchBookmarkedProperties = async (
+  userId: string
+): Promise<IProperty[] | undefined> => {
+  try {
+    revalidatePath("/properties/bookmarks");
+    await connectDB();
+    const user = await User.findOne({ clerkId: userId }).populate("bookmarks");
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+    const bookmarkedProperties = user.bookmarks;
+
+    return bookmarkedProperties;
+  } catch (error) {
+    console.error("Error fetching bookmarked properties:", error);
   }
 };

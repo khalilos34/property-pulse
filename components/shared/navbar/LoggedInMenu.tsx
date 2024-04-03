@@ -15,15 +15,15 @@ const LoggedInMenu = () => {
         href="/profile"
         className={`${
           pathname === "/profile" ? "bg-black" : ""
-        }  text-white hover:bg-gray-900 hover:text-white rounded-md mx-2 px-3 py-2`}
+        }  text-white hover:bg-gray-900 hover:text-white rounded-md mx-2 px-3 py-2 hidden md:block `}
       >
         Profile
       </Link>
       <Link
-        href="/bookmarks"
+        href="/properties/bookmarks"
         className={`${
-          pathname === "/bookmarks" ? "bg-black" : ""
-        }  text-white hover:bg-gray-900 hover:text-white rounded-md mr-2 px-3 py-2`}
+          pathname === "/properties/bookmarks" ? "bg-black" : ""
+        }  text-white hover:bg-gray-900 hover:text-white rounded-md mr-2 px-3 py-2  hidden md:block `}
       >
         Bookmarks
       </Link>
