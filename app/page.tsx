@@ -1,5 +1,6 @@
 import Hero from "@/components/shared/Hero";
 import InfoCard from "@/components/shared/InfoCard";
+import FeaturedProperties from "@/components/shared/properties/FeaturedProperties";
 import RandomHomeProperties from "@/components/shared/properties/RandomHomeProperties";
 
 const HomePage = () => {
@@ -25,6 +26,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      <FeaturedProperties />
       <RandomHomeProperties />
     </main>
   );

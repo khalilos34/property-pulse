@@ -66,3 +66,14 @@ export const fetchBookmarkedProperties = async (
     console.error("Error fetching bookmarked properties:", error);
   }
 };
+export const fetchFeaturedProperty = async (): Promise<
+  IProperty[] | undefined
+> => {
+  try {
+    await connectDB();
+    const properties = await Property.find({ is_featured: true });
+    return JSON.parse(JSON.stringify(properties));
+  } catch (error) {
+    console.log(error);
+  }
+};
