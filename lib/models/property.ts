@@ -4,6 +4,7 @@ export interface IProperty extends Document {
   _id: string;
   name: string;
   type: string;
+  owner: string;
   description?: string;
   location: {
     street: string;
