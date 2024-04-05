@@ -11,6 +11,8 @@
   "dependencies": {
     "@clerk/nextjs": "^4.29.9",
     "cloudinary": "^2.1.0",
+    "leaflet": "^1.9.4",
+    "leaflet-defaulticon-compatibility": "^0.1.2",
     "mongodb": "^6.5.0",
     "mongoos": "^0.0.1-security",
     "mongoose": "^8.2.3",
@@ -19,6 +21,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.0.1",
+    "react-leaflet": "^4.2.1",
     "react-photoswipe-gallery": "^3.0.1",
     "react-share": "^5.1.0",
     "react-spinners": "^0.13.8",
@@ -27,6 +30,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.9",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
